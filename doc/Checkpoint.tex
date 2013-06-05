@@ -1,0 +1,30 @@
+\documentclass[11pt]{article}
+
+\usepackage{fullpage}
+
+\begin{document}
+
+\title{ARM Checkpoint}
+\author{Joseph Lomasney, Ben Magistris, James Rodden, Arjun Muhunthan}
+
+\maketitle
+
+\section{Group Organisation}
+
+When we first met we worked together to understand the spec. We then decided it would be easiest for us to split the workload as evenly as possible so we could all get started. We saw the 3 main tasks as fetch, decode and execute, with execute being the largest task we split it up further between 2 people. Ben was assigned to fetch and the pipeline implementation, James was assigned to decode and Arjun and Joe were assigned to execute where they would work together and decide how to split it amongst themselves. We are coordinating our work either though our group message or through short meetings as we all live in the same hall. We think we are working together well and making good progress, but understand we may need to put more time in, to meet internal deadlines we have made.  
+
+\section{Implementation Strategies}
+
+\subsection{Structure}
+
+We decided that initially everyone would work on separate files or separate parts of files to minimize git conflicts. The fetch and pipeline would be worked on in the emulate.c file. We created an emulate header file for general functions and structs. We also created a decode c file for the code to decode an instruction as well as a execute c and header file for the code to execute a instruction. Along the way we will organize and merge our code to  make it compile more efficiently. 
+
+\subsection{Reusability of code}
+
+For the assembler we think we will be able to reuse general functions we have written such as getBit and setBit. We also think we may be able to reuse some of the instruction structs we have created. As the assembler does the opposite of the decode step in the emulator we think our decode in the emulator will help us understand the relevant steps in the assembler. 
+
+\subsection{Difficulties}
+
+As we are only just getting to grips with C, we think we will find it challenging to use some features that we are new to. We will try to revise lectures notes and use online tutorials to refine our understanding as much as possible. Currently we are finding it quite difficult to decide on an extension and which, if any electronics to order within the budget. We are going to think about this over the weekend and meet on Sunday to make our final decision. 
+
+\end{document}
