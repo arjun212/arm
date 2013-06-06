@@ -7,34 +7,6 @@ void printH(uint32_t x) {
 
 string* assemblyfile;
 
-string* tokenisefile(string buf) {
-	//MAX LINE LENGTH = 511, from SPEC
-	string line = malloc(511);
-	int i;
-	while (i < 5) {
-
-	}
-//	while (i < 2) {
-//		linesize = 0;
-//		ch = 0;
-//		while (ch != '\n') {
-//			ch = buf[linesize];
-//			linesize++;
-//		}
-//		result[linecounter] = malloc(linesize);
-//		ch = 0;
-//		linesize = 0;
-//		while (ch != '\n') {
-//			ch = buf[linesize];
-//			(result[linecounter])[linesize] = ch;
-//			linesize++;
-//		}
-//		linecounter++;
-//	}
-//	i++;
-//	return result;
-}
-
 bool isLabel(string x) {
 	int length = strlen(x);
 	if ((x[0] >= 'a' && x[0] <= 'z') || (x[0] >= 'A' && x[0] <= 'Z')) {
@@ -51,27 +23,11 @@ int main(int argc, char **argv) {
 	string a = getFile2(argc, argv);
 
 	//printf("%s\n", convertToInstruction(lines[0]));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	printf("%s\n", lines[0]);
+//	tok = strtok_r(NULL, " ,", tokens);
+//	printf("%s\n", tok);
+//	tok = strtok_r(NULL, " ,", tokens);
+//	printf("%s\n", tok);
 
 
 

@@ -71,6 +71,9 @@ uint32_t dataLookupTable(string x) {
 	addElem(newElem("teq", 9), p);
 	addElem(newElem("cmp", 10), p);
 	return getElem(x, p);
+	//COND /
+	//OPCODE /
+
 }
 
 uint32_t branchLookupTable(string x) {
@@ -117,24 +120,24 @@ uint32_t branchLookupTable(string x) {
 //
 //}
 
-//WILL RETURN uint32_t
+////WILL RETURN uint32_t
 //string convertToInstruction(string x) {
-	//string* tokens = TOKENISE(x);
-	//string tokens = strtok(x, " ,");
-	//return tokens;
+//	string* tokens = TOKENISE(x);
+//	//string tokens = strtok(x, " ,");
+//	return tokens;
 //	string token[5];
 //	if (getInstructionType(token[1]) == 0) {
-//	DATA PROCESS
+////	DATA PROCESS
 //	} else if (getInstructionType(token[1]) == 1) {
-//	MULTIPLY
+////	MULTIPLY
 //	} else if (getInstructionType(token[1]) == 2) {
-//	SINGLE DATA
+////	SINGLE DATA
 //	} else if (getInstructionType(token[1]) == 3) {
-//	BRANCH
+////	BRANCH
 //	} else if (getInstructionType(token[1]) == 4) {
-//	SPECIAL1
+////	SPECIAL1
 //	} else {
-//	SPECIAL2
+////	SPECIAL2
 //	}
 //}
 

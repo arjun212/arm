@@ -80,28 +80,42 @@ int getReg(string x) {
 	}
 }
 
-//=====================================================
-//STUFF TO REMOVE======================================
-
-void aprints(string s) {
-	printf("%s\n", s);
+uint32_t assgetBits(uint32_t number, int start, int fin) {
+	//BIT WILL BE IN THE LSB END
+	uint32_t heading = number << (31 - start);
+	uint32_t leading = heading >> (31 - (start - fin));
+	return leading;
 }
 
-void aprintBits(uint32_t x) {
-	int i;
-	uint32_t mask = 1 << 31;
-
-	for (i = 0; i < 32; ++i) {
-		printf("%i", (x & mask) != 0);
-		x <<= 1;
+uint32_t asssetBit(uint32_t number, int position, int setBit) {
+	if (getBits(number, position, position) == setBit) {
+		return number;
+	} else {
+		uint32_t bottom = getBits(number, position - 1, 0);
+		uint32_t result = number >> position;
+		result ^= 1;
+		result <<= position;
+		result += bottom;
+		return result;
 	}
-
-	printf("\n");
-
 }
 
-void aprint(uint32_t x) {
-	printf("%u\n", x);
+//start - finish is read left to right in BIG ENDIAN FORM
+//start - finish is INCLUSIVE so for a 4-bit change, diff = (4-bit) - 1
+uint32_t setBits(uint32_t original, uint32_t change, int start, int finish) {
+  int diff = start - finish;
+  uint32_t toBeChanged = original;
+
+  while (diff >= 0) {
+    uint32_t newBit = getBits(change, diff, diff);
+
+    toBeChanged = setBit(toBeChanged, start, newBit);
+
+    start--;
+    diff--;
+  }
+
+  return toBeChanged;
 }
 
 #endif /* ASSEMBLERUTILS_H_ */
