@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
 //	printf("%s\n", tok);
 //	tok = strtok_r(NULL, " ,", tokens);
 //	printf("%s\n", tok);
-
+	printf("%u\n", setBits(0, 82, 7, 1));
 
 
 

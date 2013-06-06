@@ -107,9 +107,9 @@ uint32_t setBits(uint32_t original, uint32_t change, int start, int finish) {
   uint32_t toBeChanged = original;
 
   while (diff >= 0) {
-    uint32_t newBit = getBits(change, diff, diff);
+    uint32_t newBit = assgetBits(change, diff, diff);
 
-    toBeChanged = setBit(toBeChanged, start, newBit);
+    toBeChanged = asssetBit(toBeChanged, start, newBit);
 
     start--;
     diff--;
