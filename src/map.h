@@ -34,10 +34,9 @@ typedef list_elem* listptr;
 listptr newList(elem* a) {
 	list_elem head;
 	head.position = 0;
-	head.element->key = a->key;
-	head.element->value = a->value;
-	head.prev = NULL;
-	head.next = NULL;
+	head.element = a;
+	head.prev = 0;
+	head.next = 0;
 	return &head;
 }
 
@@ -69,13 +68,23 @@ void addElem(elem* x, listptr a) {
 	if (a == NULL ) {
 		a = newitem;
 	} else {
-		while (a->next != NULL ) {
-			a = a->next;
+		listptr end = a;
+		while (end->next != 0 ) {
+  			end = end->next;
 		}
 		a->next = newitem;
 		newitem->prev = a;
 		newitem->position = (a->position)+1;
 	}
+}
+
+int numofelems(listptr a) {
+	listptr head = getHead(a);
+	int i = 1;
+	while (head->next != NULL) {
+		i++;
+	}
+	return i;
 }
 
 #endif /* MAP_H_ */

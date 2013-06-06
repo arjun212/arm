@@ -51,10 +51,48 @@ struct branch {
 	uint32_t offset;
 } branch;
 
-uint32_t assemblrbranch(branch* a) {
-	uint32_t result = 0;
-	result = setBits(result)
-	return result;
+uint32_t assembleDataProcess(struct data_process* a) {
+uint32_t result = 0;
+result = setBits(result, a->cond, 31, 28);
+result = setBits(result, a->immed, 25, 25);
+result = setBits(result, a->opCode, 24, 21);
+result = setBits(result, a->set, 20, 20);
+result = setBits(result, a->rn, 19, 16);
+result = setBits(result, a->rd, 15, 12);
+result = setBits(result, a->op2, 11, 0);
+return result;
+}
+uint32_t assembleMultiply(struct multiply* a) {
+uint32_t result = 0;
+result = setBits(result, a->cond, 31, 28);
+result = setBits(result, a->acc, 21, 21);
+result = setBits(result, a->set, 20, 20);
+result = setBits(result, a->rd, 19, 16);
+result = setBits(result, a->rn, 15, 12);
+result = setBits(result, a->rs, 11, 8);
+result = setBits(result, 9, 7, 4);
+result = setBits(result, a->rm, 3, 0);
+return result;
+}
+uint32_t assembleSingleData(struct single_data* a) {
+uint32_t result = 0;
+result = setBits(result, a->cond, 31, 28);
+result = setBits(result, 1, 26, 26);
+result = setBits(result, a->immed, 25, 25);
+result = setBits(result, a->pre, 24, 24);
+result = setBits(result, a->up, 23, 23);
+result = setBits(result, a->load, 20, 20);
+result = setBits(result, a->rn, 19, 16);
+result = setBits(result, a->rd, 15, 12);
+result = setBits(result, a->offset, 11, 0);
+return result;
+}
+uint32_t assembleBranch(struct branch* a) {
+uint32_t result = 0;
+result = setBits(result, a->cond, 31, 28);
+result = setBits(result, 5, 27, 25);
+result = setBits(result, a->offset, 24, 0);
+return result;
 }
 
 #endif /* ASSEMBLECODE_H_ */

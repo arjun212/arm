@@ -9,44 +9,6 @@
 #define CODEINST_H_
 
 #include "map.h"
-
-struct data_process {
-	uint8_t cond;
-	bool immed;
-	uint8_t opCode;
-	bool set;
-	uint8_t rn;
-	uint8_t rd;
-	uint16_t op2;
-
-};
-
-struct multiply {
-	uint8_t cond;
-	bool acc;
-	bool set;
-	uint8_t rd;
-	uint8_t rn;
-	uint8_t rs;
-	uint8_t rm;
-};
-
-struct single_data {
-	uint8_t cond;
-	bool immed;
-	bool pre;
-	bool up;
-	bool load;
-	uint8_t rn;
-	uint8_t rd;
-	uint16_t offset;
-};
-
-struct branch {
-	uint8_t cond;
-	uint32_t offset;
-};
-
 typedef enum m_inst {
 	mul, mla
 } m_inst;
@@ -60,6 +22,7 @@ typedef enum ins_type {
 } ins_type;
 
 uint32_t dataLookupTable(string x) {
+	//OUTPUTS OPCODE
 	listptr p = newList(newElem("and", 0));
 	addElem(newElem("eor", 1), p);
 	addElem(newElem("sub", 2), p);
@@ -77,6 +40,7 @@ uint32_t dataLookupTable(string x) {
 }
 
 uint32_t branchLookupTable(string x) {
+	//OUTPUTS just a cond, to distinguish between instructions
 	listptr p = newList(newElem("beq", 0));
 	addElem(newElem("bne", 1), p);
 	addElem(newElem("bge", 10), p);
@@ -87,58 +51,82 @@ uint32_t branchLookupTable(string x) {
 	return getElem(x, p);
 }
 
+uint32_t multiplyLookupTable(string x) {
+	//OUTPUTS 'A' BIT (Bit 21)
+	listptr p = newList(newElem("mul", 0));
+	addElem(newElem("mla", 1), p);
+	return getElem(x, p);
+}
 
+uint32_t singleLookupTable(string x) {
+	//OUTPUTS 'L' BIT (Bit 20)
+	listptr p = newList(newElem("ldr", 1));
+	addElem(newElem("str", 0), p);
+	return getElem(x, p);
+}
 
-//ins_type getInstructionType(string x) {
-//if (dataLookupTable(x) == 32) {
-//	return data_process;
-//	} else if (branchLookupTable(x) == 32) {
-//return branch;
-//	} else if () {
-//		//SINGLE DATA TRANSFER
-//	} else if() {
-//		 //MULTIPLY
-//	} else if() {
-//		//SPECIAL CASE 1
-//	} else {
-//		//SPECIAL CASE 2
-//	}
-//}
+uint32_t setDataLookupTable(string x) {
+	//OUTPUTS 'A' BIT (Bit 21)
+	listptr p = newList(newElem("tst", 1));
+	addElem(newElem("teq", 1), p);
+	addElem(newElem("cmp", 1), p);
+	return getElem(x, p);
+}
+
+ins_type getInstructionType(string x) {
+	if (dataLookupTable(x) != 32) {
+		return data_process;
+	} else if (branchLookupTable(x) != 32) {
+		return branch;
+	} else if (singleLookupTable(x) != 32) {
+		return single_data;
+	} else if (multiplyLookupTable(x) != 32) {
+		return multiply;
+	} else if (strncmp(x, "andeq", 5) == 0) {
+		return special1;
+	} else {
+		return special2;
+	}
+}
 
 //string spec1 = "andeq r0 r0 r0";
-//
-//uint32_t codeDataProcess(string* tokens) {
-//
-//}
-//uint32_t codeMultiply(string* tokens) {
-//
-//}uint32_t codeSingleData(string* tokens) {
-//
-//}uint32_t codeBranch(string* tokens) {
-//
-//}uint32_t SPECIAL2(string* tokens) {
-//
-//}
 
-////WILL RETURN uint32_t
-//string convertToInstruction(string x) {
-//	string* tokens = TOKENISE(x);
-//	//string tokens = strtok(x, " ,");
-//	return tokens;
-//	string token[5];
-//	if (getInstructionType(token[1]) == 0) {
-////	DATA PROCESS
-//	} else if (getInstructionType(token[1]) == 1) {
-////	MULTIPLY
-//	} else if (getInstructionType(token[1]) == 2) {
-////	SINGLE DATA
-//	} else if (getInstructionType(token[1]) == 3) {
-////	BRANCH
-//	} else if (getInstructionType(token[1]) == 4) {
-////	SPECIAL1
-//	} else {
-////	SPECIAL2
-//	}
-//}
+
+//WILL RETURN uint32_t
+string convertToInstruction(string x) {
+	//string a = FIRST TOKEN OF STRING x
+	//TOKEN[1] = FIRST WORD OF INSTRUCTION
+	string* token;
+	ins_type instructionType = getInstructionType(a);
+	if (getInstructionType(token[1]) == 0) {
+		struct data_process s;
+		s.cond = 14;
+		if (token[1])
+		s.immed = ;
+		s.op2 = ;
+		s.opCode = ;
+		s.rd = ;
+		s.rn = ;
+		s.set
+		//GET TOKENS FOR DATA PROCESS
+		//send to assemble DataProcess
+//	DATA PROCESS
+	} else if (getInstructionType(token[1]) == 1) {
+		struct data_process s;
+//	MULTIPLY
+	} else if (getInstructionType(token[1]) == 2) {
+		struct data_process s;
+//	SINGLE DATA
+	} else if (getInstructionType(token[1]) == 3) {
+		struct data_process s;
+//	BRANCH
+	} else if (getInstructionType(token[1]) == 4) {
+		struct data_process s;
+//	SPECIAL1
+	} else {
+		struct data_process s;
+//	SPECIAL2
+	}
+}
 
 #endif /* CODEINST_H_ */

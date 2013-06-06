@@ -66,7 +66,7 @@ string getFile2(int argc, char **argv) {
 	/* Close the file */
 	fclose(file);
 	/* Write entire contents of file to standard out */
-	fwrite(buffer, 1, size, stdout);
+	//fwrite(buffer, 1, size, stdout);
 
 	return buffer;
 }
